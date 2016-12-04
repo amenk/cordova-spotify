@@ -126,6 +126,23 @@ NSDictionary *sessionToDict(SPTSession* session) {
     }];
 }
 
+- (void) renewSession:(CDVInvokedUrlCommand*)command {
+    SPTAuth *auth = [SPTAuth defaultInstance];
+
+    [auth renewSession:self.session callback:^(NSError *error, SPTSession *session) {
+        auth.session = session;
+
+        if (error) {
+            [self sendResultForCommand: command withError: error andSuccess: @""];
+        } else {
+            CDVPluginResult *result = [CDVPluginResult
+                        resultWithStatus: CDVCommandStatus_OK
+                     messageAsDictionary: sessionToDict(session)];
+            [self.commandDelegate sendPluginResult: result callbackId: command.callbackId];
+        }
+    }];
+}
+
 - (void) audioStreamingDidLogin:(SPTAudioStreamingController *)audioStreaming {
     self.isLoggedIn = YES;
 }

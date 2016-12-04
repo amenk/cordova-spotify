@@ -17,6 +17,7 @@
 - (void) authenticate:(CDVInvokedUrlCommand*)command;
 - (void) play:(CDVInvokedUrlCommand*)command;
 - (void) setVolume:(CDVInvokedUrlCommand*)command;
+- (void) renewSession:(CDVInvokedUrlCommand*)command;
 
 - (void) sendResultForCommand:(CDVInvokedUrlCommand*)cmd withError:(NSError*)err andSuccess:(NSString*)success;
 @end

@@ -47,6 +47,10 @@ Session.prototype.setVolume = function (volume, callback) {
     exec("SpotifyConnector", "setVolume", [volume], callback);
 };
 
+Session.prototype.renewSession = function (callback) {
+    exec("SpotifyConnector", "renewSession", [], callback)
+};
+
 exports.authenticate = function (options, callback) {
     if (!options.urlScheme || !options.clientId || !options.scopes) {
         throw new Error("Missing urlScheme or clientId parameter.");
